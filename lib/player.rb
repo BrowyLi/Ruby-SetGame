@@ -8,7 +8,7 @@ class Player
   end
 
   def add_set(set)
-    puts "\nSet #{set_capture_message(set)} captured by #{@name}!"
+    puts "\nSet #{set_capture_message(set)} captured by #{@name}!" unless ENV == 'test'
     @sets << set
   end
   
@@ -26,7 +26,15 @@ class Player
   end
   
   def display_score
-    puts "#{@name} Sets: #{@sets.count}"
+    puts score_message
+  end
+  
+  def score_message
+    "#{@name} Sets: #{score}"
+  end
+  
+  def score
+    @sets.count
   end
 
   def <=>(other_player)

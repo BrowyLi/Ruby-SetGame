@@ -7,11 +7,7 @@ class Card
     :shading   => ["solid", "empty", "striped"],
     :number   => ["1","2","3"]
   }
-  # Color (red, green, or purple)
-  # Shape (diamond, squiggle, or oval)
-  # Shading (solid, empty, or striped)
-  # Number (one, two, or three)
-  
+
   def self.test
     set = []
     set << Card.new(number: "2", color: "red", shading: "solid", shape: "squiggle")
@@ -53,6 +49,13 @@ class Card
   def self.generate_random_card
     Card.new(random_attr_hash)
   end
+  
+  def self.generate_random_cards(n)
+    cards = []
+    n.times { cards << self.generate_random_card}
+    
+    cards
+  end
 
   def self.validate(attributes)
     attributes.each do |k, v|
@@ -61,17 +64,9 @@ class Card
   end
   
   # Three cards  are a part of a set if, for each property, the values are all the same or all different.
-  # For example:
-  # set = []
-  # set << Card.new(number: "2", color: "red", shading: "solid", shape: "squiggle")
-  # set << Card.new(number: "1", color: "green", shading: "solid", shape: "diamond")
-  # set << Card.new(number: "3", color: "purple", shading: "solid", shape: "oval")
-  # The cards "two red solid squiggles", "one green solid diamond", "three purple solid ovals" would make up a set. (number, shape, and color are different, shading is the same)
-  # no_set = []
-  # no_set << Card.new(number: "2", color: "red", shading: "solid", shape: "squiggle")
-  # no_set << Card.new(number: "1", color: "green", shading: "solid", shape: "squiggle")
-  # no_set << Card.new(number: "3", color: "purple", shading: "solid", shape: "oval")
-  # The cards "two red solid squiggles", "one green solid squiggles", "three purple solid oval" would not make up a set, because shape is the same on two cards, but different on the third.
+  
+  # TODO: Given more time, I would move this logic into a Set class consisting of 3 cards, these validations
+  # and helper methods.
   
   # A method that takes three cards, and determines whether the three cards make a set
   def self.is_set?(card1, card2, card3)
@@ -105,7 +100,7 @@ class Card
   def initialize(attributes)
     self.class.validate color: attributes[:color], shape: attributes[:shape], shading: attributes[:shading], number: attributes[:number]
 
-    @color, @shape, @shading, @number = attributes[:color], attributes[:shape], attributes[:shading], attributes[:number]
+    @color, @shape, @shading, @number = attributes[:color].to_s, attributes[:shape].to_s, attributes[:shading].to_s, attributes[:number].to_s
   end
 
   def to_s

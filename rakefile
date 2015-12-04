@@ -1,0 +1,18 @@
+task default: %w[easy]
+
+task :easy do
+  ruby './lib/game.rb' ' easy'
+end
+
+
+task :hard do
+  ruby './lib/game.rb' ' hard'
+end
+
+task :auto do
+  ruby './lib/game.rb' ' auto'
+end
+
+task :spec do
+  rspec './spec'
+end

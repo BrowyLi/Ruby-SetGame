@@ -2,8 +2,6 @@ require_relative './card'
 
 class Deck
   
-  attr_reader :cards
-  
   def self.attri
     @attri ||= Card::ATTRIBUTES
   end
@@ -24,7 +22,7 @@ class Deck
   end
   
   def initialize(cards = Deck.all_cards.shuffle)
-    @cards = cards
+    @cards = cards.dup
   end
 
   def count
@@ -44,6 +42,10 @@ class Deck
     take!(n)
   end
 
+  def return(cards)
+    @cards.push(*cards)
+  end
+  
   def take!(n)
     @cards.shift(n)
   end

@@ -63,3 +63,14 @@ Questions:
 2. How many players? (2 by default, by accepts a num_players parameter)
 3. How many cards in a deck? (3*3*3*3 = 81 possible unique comibiations)
 4. Is the game supposed to play by itself then exit and list all captured sets?
+
+## Instructions to run specs:
+My SetGame is written in ruby and designed to be played in the CLI. To run a game:
+
+1. Open a new terminal window and navigate 'SetGame' to the project directory.
+2. run 'bundle install' to install ruby and dependencies.
+3. Run commands:
+  * 'rspec' to run tests
+  * 'rake easy' to run the easy version of the game (The cards aren't shuffled so the sets are all in a row)
+  * 'rake hard' to run the normal version of the game with cards in a random order.
+  * 'rake auto' to have to game run by itself automatically with a computer player.

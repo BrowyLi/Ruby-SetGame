@@ -4,7 +4,7 @@ require_relative './deck'
 class Board
   attr_reader :cards, :deck
 
-  def initialize(cards)
+  def initialize(cards = [])
     @cards = cards
   end
 
@@ -18,6 +18,17 @@ class Board
     puts "Incorrect! Not a set!" unless is_set
     
     is_set
+  end
+  
+  def indices_for(set)
+    indices = []
+    return indices unless set || set.empty?
+    
+    set.each do |c|
+      indices << @cards.index(c)
+    end
+    
+    indices
   end
   
   def remove_cards(cards)
@@ -65,5 +76,4 @@ class Board
     
     puts str + "\n#Cards on board: #{@cards.count}"
   end
-
 end
